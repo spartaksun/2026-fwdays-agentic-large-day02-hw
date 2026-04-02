@@ -22,6 +22,12 @@ alwaysApply: true
 - kebab-case for files: `element-utils.ts`
 - PascalCase for components: `LayerUI.tsx`
 
+## A/B Test: conventions.mdc
+
+- **Prompt**: "Create a component for element properties panel"
+- **Result A (rule ON)**: functional component + hooks, **`{ComponentName}Props`**, **named export**, **strict types** (`import type`, no `any`), **PascalCase** component file, **colocated** `ComponentName.test.tsx` under `packages/*` when applicable
+- **Result B (rule OFF)**: class component, **default export**, `any` / `@ts-ignore`, mismatched file naming (e.g. `elementPropertiesPanel.tsx`), easy to skip tests
+
 ## How to verify
 
 After substantive changes under `packages/`:
