@@ -1,0 +1,32 @@
+---
+description: "Memory Bank — read and update persistent project context after changes"
+alwaysApply: true
+---
+
+# Memory Bank
+
+## Location
+
+All files under `memory-bank/`:
+
+| File | Update when |
+|------|-------------|
+| `projectbrief.md` | Goals, scope, or hard constraints change |
+| `productContext.md` | User-facing intent or problem framing changes |
+| `activeContext.md` | Every substantive session — current focus, decisions, open questions |
+| `systemPatterns.md` | Architecture, state, rendering, or monorepo patterns change |
+| `techContext.md` | Tooling, commands, stack, or repo layout changes |
+| `progress.md` | Features ship, bugs fixed, or notable risks emerge |
+
+## Rules
+
+1. **Before** large or ambiguous tasks, skim `memory-bank/activeContext.md` and any file likely relevant to the area you are editing.
+2. **After** completing work that changes behavior, structure, APIs, or team conventions, **update the affected memory-bank file(s)** in the same change set when practical (or immediately in a follow-up if the user stops the session).
+3. Write **short, factual** bullets — no essays. Do not duplicate entire source files; point to paths when details live in code.
+4. If a standard file is missing, recreate it using the table above.
+
+## How to verify
+
+- For behavior, API, or convention changes: the PR (or follow-up) includes updates to the relevant `memory-bank/*.md` files, not only code.
+- Skim `memory-bank/activeContext.md` and any file tied to the area you edited; bullets should still match reality after the change (no stale “current focus” or wrong commands).
+- If you introduced a new standard file from the table, confirm it exists under `memory-bank/` and is listed where agents expect (see `AGENTS.md` / `.cursor/rules/memory-bank.mdc`).

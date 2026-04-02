@@ -1,0 +1,56 @@
+---
+description: Naming conventions for TypeScript and React (files, symbols, hooks)
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# Naming
+
+## Files
+
+- Non-component modules: `kebab-case.ts` / `kebab-case.tsx` (e.g. `element-utils.ts`).
+- React components: `PascalCase.tsx` (e.g. `LayerUI.tsx`).
+- Tests next to source: `SameBaseName.test.tsx`.
+
+## React
+
+- Component functions: `PascalCase`.
+- Props type for component `Foo`: `FooProps`.
+- Hooks: `use` + camelCase description, e.g. `useCanvasPointer`.
+- Prefer readable boolean props: `isOpen`, `hasSelection`, `shouldPersist`.
+
+## TypeScript symbols
+
+- Variables, functions, methods, properties: `camelCase`.
+- Types, interfaces, enums: `PascalCase`.
+- Generic type parameters: single uppercase or `TItem`-style when clarity helps (`T`, `K`, `TElement`).
+
+## Module-level constants
+
+- Tune numbers, flags, and shared literals often use `UPPER_SNAKE` in this codebase (e.g. `SCROLLBAR_WIDTH`).
+- Structured or exported singleton-like objects may use `PascalCase` (e.g. font face lists). Match the surrounding package.
+
+## Examples
+
+```tsx
+// ❌ BAD — file AppHelpers.tsx for a non-component module
+// ✅ GOOD — app-helpers.ts
+
+// ❌ BAD
+const Default_color = "#000";
+
+// ✅ GOOD
+const defaultColor = "#000";
+
+// ❌ BAD — boolean prop
+<Foo open={true} />
+
+// ✅ GOOD
+<Foo isOpen={true} />
+```
+
+## How to verify
+
+- `yarn test:typecheck` — catches many symbol and export issues.
+- `yarn fix` — ESLint and formatting; rename drift often shows up in import paths or duplicate basenames.
+- In review: match file basenames to role (kebab-case modules vs `PascalCase` components), `Foo` ↔ `FooProps`, and `use*` for hooks.

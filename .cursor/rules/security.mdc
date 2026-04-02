@@ -1,0 +1,56 @@
+---
+description: "Security — secrets, untrusted data, DOM, network, dependencies, auth (app, packages, examples, scripts)"
+globs: excalidraw-app/**/*.ts,excalidraw-app/**/*.tsx,packages/**/*.ts,packages/**/*.tsx,examples/**/*.ts,examples/**/*.tsx,scripts/**/*.js,scripts/**/*.cjs,scripts/**/*.mjs
+alwaysApply: false
+---
+
+# Security
+
+## Secrets and configuration
+
+- Do not commit secrets, API keys, tokens, or real `.env` values. Use placeholders in docs and example env files.
+- Read secrets from environment or approved secret stores only — never hardcode for “convenience”.
+
+```typescript
+// ❌ BAD
+const API_KEY = "sk-live-...";
+
+// ✅ GOOD
+const apiKey = import.meta.env.VITE_SOME_KEY; // or process.env in Node tooling
+```
+
+## Untrusted data and the DOM
+
+- Treat scene JSON, collaborator payloads, URLs, and file contents as untrusted unless a strict validation path exists.
+- Avoid `dangerouslySetInnerHTML`, `eval`, `new Function`, and string-built `setTimeout`/`setInterval`. If HTML is unavoidable, sanitize with a maintained library and narrow the surface.
+
+```typescript
+// ❌ BAD
+element.innerHTML = userProvidedString;
+
+// ✅ GOOD — prefer text nodes or framework-safe rendering; if HTML, use a vetted sanitizer + CSP
+```
+
+## Network and redirects
+
+- Do not pass user-controlled strings into `fetch`, `open`, or redirect targets without allowlisting hosts/schemes. Block `javascript:` and unexpected protocols.
+
+## Dependencies and supply chain
+
+- Prefer existing workspace dependencies over ad hoc downloads or copy-paste of minified third-party code.
+- Do not disable security lint rules or `npm audit` / `yarn audit` findings without a documented risk decision.
+
+## Auth and sessions
+
+- Do not weaken cookie or session settings (e.g. `SameSite`, `HttpOnly`, `Secure`) to “fix” local dev without scoping changes to dev-only config.
+- Never log passwords, refresh tokens, or full session cookies.
+
+## When in doubt
+
+- Prefer defense in depth: validate input, encode output for context (HTML/URL/JS), and keep sensitive operations on the server when the app gains a backend.
+
+## How to verify
+
+- `yarn audit` (or the repo’s dependency audit workflow) after lockfile or dependency changes.
+- Search changed code for risky APIs: `dangerouslySetInnerHTML`, `eval`, `new Function`, raw `innerHTML`, and user input in `fetch` URLs or `window.open` targets.
+- Confirm no real secrets in commits: scan for API-key-shaped strings and ensure `.env` and similar stay local or use placeholders only.
