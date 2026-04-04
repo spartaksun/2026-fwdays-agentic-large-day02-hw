@@ -29,13 +29,13 @@ export const ElementCoordinates = ({
 
     return (
       <Stats.StatsRows>
-        <Stats.StatsRow heading>Coordinates</Stats.StatsRow>
+        <Stats.StatsRow heading>{t("stats.coordinates")}</Stats.StatsRow>
         <Stats.StatsRow columns={2}>
-          <div>X</div>
+          <div>{t("stats.x")}</div>
           <div>{round(x, 2)}</div>
         </Stats.StatsRow>
         <Stats.StatsRow columns={2}>
-          <div>Y</div>
+          <div>{t("stats.y")}</div>
           <div>{round(y, 2)}</div>
         </Stats.StatsRow>
         <Stats.StatsRow columns={2}>
@@ -60,13 +60,13 @@ export const ElementCoordinates = ({
 
   return (
     <Stats.StatsRows>
-      <Stats.StatsRow heading>Coordinates</Stats.StatsRow>
+      <Stats.StatsRow heading>{t("stats.coordinates")}</Stats.StatsRow>
       <Stats.StatsRow columns={2}>
-        <div>X</div>
+        <div>{t("stats.x")}</div>
         <div>{round(minX, 2)}</div>
       </Stats.StatsRow>
       <Stats.StatsRow columns={2}>
-        <div>Y</div>
+        <div>{t("stats.y")}</div>
         <div>{round(minY, 2)}</div>
       </Stats.StatsRow>
       <Stats.StatsRow columns={2}>

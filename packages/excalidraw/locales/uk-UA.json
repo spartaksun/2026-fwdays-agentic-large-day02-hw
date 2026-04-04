@@ -508,6 +508,7 @@
   },
   "stats": {
     "angle": "Кут",
+    "coordinates": "Координати",
     "shapes": "Форми",
     "height": "Висота",
     "scene": "Сцена",
@@ -521,7 +522,9 @@
     "version": "Версія",
     "versionCopy": "Натисніть, щоб скопіювати",
     "versionNotAvailable": "Версія недоступна",
-    "width": "Ширина"
+    "width": "Ширина",
+    "x": "X",
+    "y": "Y"
   },
   "toast": {
     "addedToLibrary": "Додано до бібліотеки",
